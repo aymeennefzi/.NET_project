@@ -57,3 +57,4 @@ C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\obj\De
 C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\obj\Debug\net6.0\RestfulApi.pdb
 C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\obj\Debug\net6.0\RestfulApi.genruntimeconfig.cache
 C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\obj\Debug\net6.0\ref\RestfulApi.dll
+C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\obj\Debug\net6.0\RestfulApi.sourcelink.json
