@@ -1,0 +1,35 @@
+2025-01-02 23:22:45.199 +01:00 [INF] Now listening on: https://localhost:7117
+2025-01-02 23:22:45.293 +01:00 [INF] Now listening on: http://localhost:5110
+2025-01-02 23:22:45.306 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-02 23:22:45.309 +01:00 [INF] Hosting environment: Development
+2025-01-02 23:22:45.310 +01:00 [INF] Content root path: C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\
+2025-01-02 23:23:58.006 +01:00 [INF] Now listening on: https://localhost:7117
+2025-01-02 23:23:58.124 +01:00 [INF] Now listening on: http://localhost:5110
+2025-01-02 23:23:58.139 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-02 23:23:58.142 +01:00 [INF] Hosting environment: Development
+2025-01-02 23:23:58.143 +01:00 [INF] Content root path: C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\
+2025-01-02 23:25:26.261 +01:00 [INF] Made call to weather Endpoint
+2025-01-02 23:25:26.362 +01:00 [ERR] Fatal Error Occurred
+System.Exception: This is our logging test exception
+   at RestfulApi.Controllers.WeatherForecastController.Get() in C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\Controllers\WeatherForecastController.cs:line 27
+2025-01-02 23:25:43.066 +01:00 [ERR] An unhandled exception has occurred while executing the request.
+System.Exception: This is our logging test exception
+   at RestfulApi.Controllers.WeatherForecastController.Get() in C:\Users\OMGBoomRito1\Documents\5 Twin 5\.NET Project\FirstApp\RestfulApi\Controllers\WeatherForecastController.cs:line 27
+   at lambda_method2(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
