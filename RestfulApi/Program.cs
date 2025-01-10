@@ -1,29 +1,56 @@
+using Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
+using MediatR;
 using Serilog;
+using ApplicationCore.Base;
+using ApplicationCore.BusinessLogic.Interfaces;
+using ApplicationCore.BusinessLogic.Services;
+using ApplicationCore.Commands;
+using ApplicationCore.Queries;
+using System.Reflection;
+using ApplicationCore.Handlers;
+using Domain.Models;
+using Infrastructure.Base;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Configuration de la base de données
+builder.Services.AddDatabaseConfiguration(builder.Configuration);
 
+// Enregistrement des dépendances
+builder.Services.AddScoped<IBaseRepository<Person>, BaseRepository<Person>>();
+builder.Services.AddScoped<IPersonService, PersonService>();
+
+// Configuration de MediatR
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+});
+
+// Ajout des contrôleurs et de Swagger
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Host.UseSerilog((ctx,lc)=> 
+
+// Configuration de Serilog
+builder.Host.UseSerilog((ctx, lc) =>
     lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
 
+// Configuration de CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        b => b.
-         AllowAnyMethod()
+    options.AddPolicy("AllowAll", b => b
+        .AllowAnyMethod()
         .AllowAnyHeader()
-        .AllowAnyOrigin()
-    );
+        .AllowAnyOrigin());
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middlewares pour le développement
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -31,12 +58,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-//Configuration CORS POLICIES
 app.UseCors("AllowAll");
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
