@@ -1,49 +1,65 @@
 ﻿using Domain.Base;
+using Domain.Interfaces;
 using Infrastructure.Base;
+using Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ApplicationCore.Base
 {
-    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity
+    public class BaseService<T> : IBaseService<T> where T : class
     {
-        private readonly IBaseRepository<TEntity> _repository;
-
-        public BaseService(IBaseRepository<TEntity> repository)
+        private readonly IGenericRepository<T> repository;
+        private readonly IUnitOfWork unitOfWork;
+        public BaseService(IUnitOfWork unitOfWork)
         {
-            _repository = repository;
+            this.repository = unitOfWork.Repository<T>();
+            this.unitOfWork = unitOfWork;
         }
 
-        public async Task<TEntity> GetByIdAsync(int id)
+        public async Task<T> AddAsync(T entity)
         {
-            return await _repository.GetById(id);
+            var repository = unitOfWork.Repository<T>(); 
+            return await repository.AddAsync(entity); 
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
+        public void Commit()
         {
-            return await _repository.GetAllAsync();
+            throw new NotImplementedException();
         }
 
-        public async Task<int> CreateAsync(TEntity entity)
+        public void Delete(T entity)
         {
-            return await _repository.AddAsync(entity);
+            repository.Update(entity);
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public void Delete(System.Linq.Expressions.Expression<Func<T, bool>> where)
         {
-            await _repository.UpdateAsync(entity);
+            repository.Delete(where);
         }
 
-        public async Task DeleteAsync(int id)
+        public virtual T Get(Expression<Func<T, bool>> where)
         {
-            var entity = await _repository.GetById(id);
-            if (entity != null)
-            {
-                await _repository.DeleteAsync(entity);
-            }
+            return repository.Get(where);
+        }
+
+        public T GetById(params object[] keyValues)
+        {
+            return repository.GetById(keyValues);
+        }
+
+        public virtual IEnumerable<T> GetMany(Expression<Func<T, bool>> filter = null)
+        {
+            return repository.GetMany(filter);
+        }
+
+        public virtual void Update(T entity)
+        {
+            repository.Update(entity);
         }
     }
 }

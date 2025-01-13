@@ -1,9 +1,11 @@
 ﻿using ApplicationCore.BusinessLogic.Interfaces;
 using ApplicationCore.BusinessLogic.Services;
 using ApplicationCore.Handlers;
+using Domain.Interfaces;
 using Domain.Models;
 using Infrastructure.Base;
 using Infrastructure.Database;
+using Infrastructure.Repositories;
 using MediatR;
 namespace RestfulApi.Configs
 {
@@ -45,10 +47,10 @@ namespace RestfulApi.Configs
         {
             services.AddMediatR(cfg =>
             {
-                cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
-                cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(CreatePersonCommandHandler).Assembly);
+                //cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+                //cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
+                //cfg.RegisterServicesFromAssembly(typeof(GetAllPersonsQueryHandler).Assembly);
             });
 
             return services;
@@ -73,6 +75,7 @@ namespace RestfulApi.Configs
         {
             services.AddScoped<IBaseRepository<Person>, BaseRepository<Person>>();
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

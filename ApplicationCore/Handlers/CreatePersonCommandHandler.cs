@@ -28,7 +28,8 @@ namespace ApplicationCore.Handlers
                 Email = request.Email
             };
 
-            return await _personService.CreateAsync(person);
+            var addedPerson = await _personService.AddAsync(person);
+            return addedPerson.Id;
         }
     }
 }

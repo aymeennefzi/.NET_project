@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Base;
 using ApplicationCore.BusinessLogic.Interfaces;
+using Domain.Interfaces;
 using Domain.Models;
 using Infrastructure.Base;
 using System;
@@ -10,42 +11,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.BusinessLogic.Services
 {
-    public class PersonService : IPersonService
-    {
-        private readonly IBaseRepository<Person> _personRepository;
+    public class PersonService : BaseService<Person>, IPersonService
 
-        public PersonService(IBaseRepository<Person> personRepository)
+    {   
+        public PersonService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-            _personRepository = personRepository ?? throw new ArgumentNullException(nameof(personRepository), "Repository is null");
         }
-
-        public async Task<int> CreateAsync(Person entity)
-        {
-            return await _personRepository.AddAsync(entity);
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            var person = await _personRepository.GetById(id);
-            if (person != null)
-            {
-                await _personRepository.DeleteAsync(person);
-            }
-        }
-
-        public async Task<List<Person>> GetAllAsync()
-        {
-            return await _personRepository.GetAllAsync();
-        }
-
-        public async Task<Person> GetByIdAsync(int id)
-        {
-            return await _personRepository.GetById(id);
-        }
-
-        public async Task UpdateAsync(Person entity)
-        {
-             await _personRepository.UpdateAsync(entity);
-        }     
     }
 }

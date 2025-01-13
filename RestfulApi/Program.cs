@@ -1,9 +1,11 @@
 using Serilog;
 using RestfulApi.Configs;
+using Infrastructure.Repositories.Generic;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Register(builder.Configuration);
+builder.Services.AddSingleton<Type>(t => typeof(GenericRepository<>));
 
 
 // Configuration de Serilog
